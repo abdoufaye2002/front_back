@@ -87,8 +87,7 @@ const Auth = () => {
       <h2>Login Required</h2>
       <hr />
       <form onSubmit={authSubmitHandler}>
-        {!isLoginMode &
-        (
+        {!isLoginMode && (
           <Input
             element="input"
             id="name"
