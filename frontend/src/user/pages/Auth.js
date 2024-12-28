@@ -15,6 +15,8 @@ import "./Auth.css";
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -60,6 +62,8 @@ const Auth = () => {
     if (isLoginMode) {
     } else {
       try {
+        setIsLoading(true);
+        setError(null);
         const response = await fetch("http://localhost:3000/api/users/signup", {
           method: "POST",
           headers: {
@@ -76,9 +80,12 @@ const Auth = () => {
         console.log(responseData);
       } catch (err) {
         console.log(err);
+        setError(
+          err.message || `Quelques choses s'est mal passer, essayer a nouveau`
+        );
       }
     }
-
+    setIsLoading(false);
     auth.login();
   };
 
