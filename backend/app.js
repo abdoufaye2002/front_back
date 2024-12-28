@@ -9,7 +9,9 @@ const port = 3000;
 
 // Middleware pour parser les données JSON
 app.use(express.json());
-
+app.use((req, res, next) => {
+  next();
+});
 app.use("/api/places", placesRoutes);
 app.use("/api/users", usersRoutes);
 
