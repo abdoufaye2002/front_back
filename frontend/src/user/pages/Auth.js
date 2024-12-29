@@ -64,13 +64,12 @@ const Auth = () => {
     if (isLoginMode) {
       try {
         setError(null);
-        const response = await fetch("http://localhost:3000/api/users/signup", {
+        const response = await fetch("http://localhost:3000/api/users/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: formState.inputs.name.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
