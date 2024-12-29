@@ -85,7 +85,9 @@ const Auth = () => {
       } catch (err) {
         console.log(err);
         setIsLoading(false);
-        setError(err.message || `L'utilisateur existe deja, essayer a nouveau`);
+        setError(
+          err.message || `Adress ou mot de passe correct,reessayer a nouveau`
+        );
       }
     } else {
       try {
