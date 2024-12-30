@@ -30,4 +30,4 @@ const UsersList = (props) => {
   );
 };
 
-export default UsersList; //user
+export default UsersList;
