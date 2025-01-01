@@ -76,7 +76,7 @@ const createPlace = async (req, res, next) => {
     return next(new HttpError("L'entrée est invalide!", 422));
   }
   const { title, description, address, creator } = req.body;
-
+  const { location, adress, mail, name, username } = req.body;
   // Simuler des coordonnées aléatoires
   const coordinates = {
     lat: (Math.random() * 180 - 90).toFixed(6), // Latitude entre -90 et 90
