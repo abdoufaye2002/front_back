@@ -30,6 +30,4 @@ const UsersList = (props) => {
   );
 };
 
-export default UsersList;
-//salalakhou anla mouhamed
-//Bismilah
+export default UsersList; //Userlist
