@@ -62,18 +62,21 @@ const Auth = () => {
     event.preventDefault();
 
     if (isLoginMode) {
-      await sendRequest(
-        "http://localhost:3000/api/users/login",
-        "POST",
-        JSON.stringify({
-          email: formState.inputs.email.value,
-          password: formState.inputs.password.value,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-      auth.login();
+      try {
+        await sendRequest(
+          "http://localhost:3000/api/users/login",
+          "POST",
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+      } catch (err) {
+        auth.login();
+      }
     } else {
       try {
         const response = await fetch("http://localhost:3000/api/users/signup", {

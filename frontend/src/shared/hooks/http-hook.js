@@ -22,11 +22,13 @@ export const useHttpClient = () => {
         if (!response.ok) {
           throw new Error(response.message);
         }
+        setIsLoading(false);
         return responseData;
       } catch (err) {
         setError(error.message);
+        setIsLoading(false);
+        throw err;
       }
-      setIsLoading(false);
     },
     []
   );
