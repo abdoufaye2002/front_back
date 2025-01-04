@@ -27,5 +27,5 @@ export const useHttpClient = () => {
     }
     setIsLoading(false);
   };
-  return { isLoading, error, sendRequest };
+  return { isLoading, error, sendRequest }; // equivaut a isLoading:isLoading
 };
