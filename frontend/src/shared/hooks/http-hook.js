@@ -4,11 +4,21 @@ export const useHttpClient = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
-  const sendRequest = (url, method = "GET", body = null, headers = {}) => {
-    fetch(url, {
+  const sendRequest = async (
+    url,
+    method = "GET",
+    body = null,
+    headers = {}
+  ) => {
+    const response = await fetch(url, {
       method, // equivaut a method:method
       body,
       headers,
     });
+    const responseData = await response.json();
+    if (!response.ok) {
+      throw new Error(response.message);
+    }
+    console.log(responseData);
   };
 };
