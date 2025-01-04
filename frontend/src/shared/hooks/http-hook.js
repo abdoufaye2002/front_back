@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useHttpClient = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,13 +9,14 @@ export const useHttpClient = () => {
   const sendRequest = useCallback(
     async (url, method = "GET", body = null, headers = {}) => {
       setIsLoading(true);
-      const httpAbortCtrll = new AbortController();
-      activeHttpRequests.current.push(httpAbortCtrll);
+      const httpAbortCtrl = new AbortController();
+      activeHttpRequests.current.push(httpAbortCtrl);
       try {
         const response = await fetch(url, {
           method, // equivaut a method:method
           body,
           headers,
+          signal: httpAbortCtrl.signal,
         });
         const responseData = await response.json();
         if (!response.ok) {
@@ -32,5 +33,10 @@ export const useHttpClient = () => {
   const clearError = () => {
     setError(null);
   };
+  useEffect(() => {
+    return () => {
+      activeHttpRequests.current.forEach((abortCtrl) => abortCtrl.abort());
+    };
+  }, []);
   return { isLoading, error, sendRequest, clearError }; // equivaut a isLoading:isLoading
 };
