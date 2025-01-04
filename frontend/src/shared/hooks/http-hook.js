@@ -21,10 +21,11 @@ export const useHttpClient = () => {
       if (!response.ok) {
         throw new Error(response.message);
       }
-      console.log(responseData);
+      return responseData;
     } catch (err) {
       setError(error.message);
     }
     setIsLoading(false);
   };
+  return { isLoading, error, sendRequest };
 };
