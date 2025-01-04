@@ -4,6 +4,8 @@ export const useHttpClient = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
+  const activeHttpRequests = [];
+
   const sendRequest = useCallback(
     async (url, method = "GET", body = null, headers = {}) => {
       setIsLoading(true);
@@ -28,5 +30,5 @@ export const useHttpClient = () => {
   const clearError = () => {
     setError(null);
   };
-  return { isLoading, error, sendRequest }; // equivaut a isLoading:isLoading
+  return { isLoading, error, sendRequest, clearError }; // equivaut a isLoading:isLoading
 };
