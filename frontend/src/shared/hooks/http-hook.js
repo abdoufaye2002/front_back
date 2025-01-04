@@ -10,6 +10,7 @@ export const useHttpClient = () => {
     body = null,
     headers = {}
   ) => {
+    setIsLoading(true);
     try {
       const response = await fetch(url, {
         method, // equivaut a method:method
@@ -24,5 +25,6 @@ export const useHttpClient = () => {
     } catch (err) {
       setError(error.message);
     }
+    setIsLoading(false);
   };
 };
