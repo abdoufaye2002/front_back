@@ -74,39 +74,28 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
-      } catch (err) {
         auth.login();
-      }
+      } catch (err) {}
     } else {
       try {
-        const response = await fetch("http://localhost:3000/api/users/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        await sendRequest(
+          "http://localhost:3000/api/users/signup",
+          "POST",
+          JSON.stringify({
             name: formState.inputs.name.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
-        });
-
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(response.message);
-        }
-        console.log(responseData);
-        setIsLoading(false);
+          {
+            "Content-Type": "application/json",
+          }
+        );
         auth.login();
-      } catch (err) {
-        console.log(err);
-        setIsLoading(false);
-        setError(err.message || `L'utilisateur existe deja, essayer a nouveau`);
-      }
+      } catch (err) {}
     }
   };
   const errorHandler = () => {
-    setError(null);
+    clearError();
   };
 
   return (
