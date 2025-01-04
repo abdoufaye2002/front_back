@@ -10,15 +10,19 @@ export const useHttpClient = () => {
     body = null,
     headers = {}
   ) => {
-    const response = await fetch(url, {
-      method, // equivaut a method:method
-      body,
-      headers,
-    });
-    const responseData = await response.json();
-    if (!response.ok) {
-      throw new Error(response.message);
+    try {
+      const response = await fetch(url, {
+        method, // equivaut a method:method
+        body,
+        headers,
+      });
+      const responseData = await response.json();
+      if (!response.ok) {
+        throw new Error(response.message);
+      }
+      console.log(responseData);
+    } catch (err) {
+      setError(error.message);
     }
-    console.log(responseData);
   };
 };
